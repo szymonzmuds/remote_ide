@@ -38,7 +38,7 @@ body{
     border: none;
     background-color: black;
     color: whitesmoke;
-    margin: 5px;
+    height: 100%;
 }
 
 .menu button:hover{
@@ -50,13 +50,22 @@ body{
     position: fixed;
     top: 15%;
     left: 0%;
-
-
-
     background-color: dimgrey;
     width: 20%;
     float: left;
     margin: 5px;
+    overflow: scroll;
+    
+}
+
+.dir {
+    position: relative;
+    left: 15px;
+}
+
+.file {
+    position: relative;
+    left: 15px;
 }
 
 .display{
