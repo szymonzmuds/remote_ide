@@ -2,6 +2,8 @@ var socket = io.connect('http://localhost:3000');
 
 var root = document.getElementById("root");
 
+var active_id = null;
+
 
 window.onload = function () {
     /*
@@ -27,11 +29,14 @@ socket.on('start', function (data) {
             tmp.addEventListener("click", file_explorer_onclick);
             tmp.id = dir[i];
             tmp.className = "dir";
+            var disp = document.createElement("div");
+            disp.className = "disp";
             b.innerText = dir[i];
-            tmp.appendChild(b);
+            disp.appendChild(b);
+            tmp.appendChild(disp);
             root.appendChild(tmp);
-            var br = document.createElement("br");
-            root.appendChild(br);
+            //var br = document.createElement("br");
+            //root.appendChild(br);
         }
     }
     for(var i = 0; i < files.length; i++){
@@ -39,11 +44,14 @@ socket.on('start', function (data) {
             var tmp = document.createElement("div");
             tmp.id = files[i];
             tmp.className = "file";
-            tmp.innerText = files[i];
+            var disp = document.createElement("div");
+            disp.className = "disp";
+            disp.innerText = files[i];
+            tmp.appendChild(disp);
             tmp.addEventListener("click", check_file);
             root.appendChild(tmp);
-            var br = document.createElement("br");
-            root.appendChild(br);
+            //var br = document.createElement("br");
+            //root.appendChild(br);
         }
     }
 
@@ -65,8 +73,11 @@ socket.on('explorer', function(data) {
                 var b = document.createElement("b");
                 div.addEventListener("click", file_explorer_onclick);
                 div.id = dir[i];
+                var disp = document.createElement("div");
+                disp.className = "disp";
                 b.innerText = dir[i];
-                div.appendChild(b);
+                disp.appendChild(b);
+                div.appendChild(disp);
                 div.className = "dir";
                 parent.appendChild(div);
             }
@@ -75,7 +86,10 @@ socket.on('explorer', function(data) {
             if(files[i][0] != "."){
                 var div = document.createElement("div");
                 div.id = files[i];
-                div.innerText = files[i];
+                var disp = document.createElement("div");
+                disp.innerText = files[i];
+                disp.className = "disp";
+                div.appendChild(disp);
                 div.addEventListener("click", check_file);
                 div.className = "file";
                 parent.appendChild(div);
@@ -90,6 +104,8 @@ socket.on('explorer', function(data) {
         parent.appendChild(div);
     }
 });
+
+
 
 
 
@@ -133,3 +149,4 @@ function check_file(){
     and then displaying some files, like jpeg, png, txt, py, .c etc
     */
 }
+
